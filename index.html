@@ -1,0 +1,66 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+    <div style="position: absolute;" id="signature-sect">
+        <h1 id="signature"></h1>
+        
+    </div>
+
+
+    <div id="content" style="display: flex; flex-direction: column; margin-left: 20%; margin-right: 20%;">
+        <input id="skuld" placeholder="Skuld" type="number" style="height: 40px; margin-bottom: 10px;">
+        <div></div>
+        <input id="renta" placeholder="Ränta(decimal)" type="number" style="height: 40px; margin-bottom: 10px;">
+        <div></div>
+        <input id="tid" placeholder="Tid(antal betalningar)" type="number" style="height: 40px; margin-bottom: 10px;">
+        <div></div>
+        <button id="button" onclick="text()" style="height: 40px; margin-bottom: 10px;">Räkna</button>
+        <div></div>
+        <p id="text"></p>
+    </div>
+
+    <script>
+
+        function lan(skuld, renta, tid){
+
+        let betal = [];
+        let skuldOrg = skuld;
+        let totalSumma = 0;
+
+        for(i = 0; i<tid; i++){
+            betal.push(skuldOrg/tid+renta*skuld);
+            skuld -= skuldOrg/tid;
+        }
+
+        for(i = 0; i<betal.length; i++){
+            totalSumma += betal[i];
+        }
+
+        let text = betal.join("kr - ");
+        return text + "kr. antal betalningar: " + betal.length + "st" + ". Total Summa:" + totalSumma + "kr";
+        }
+
+        function text(){
+        hSkuld = document.getElementById("skuld");
+        hRenta = document.getElementById("renta");
+        hTid = document.getElementById("tid");
+        hText = document.getElementById("text");
+
+
+        hText.innerText = lan(hSkuld.value, hRenta.value, hTid.value);
+
+        }
+
+    </script>
+
+
+
+
+</body>
+</html>
